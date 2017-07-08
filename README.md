@@ -20,18 +20,21 @@ Instead, I took his idea and wrote a shell script to apply his changes as a patc
   * Edit > Preferences > Packages
   * under "Core Packages",<br>
     scroll nearly to the bottom and find the package named: "tree-view"
+  * click: "Disable"
   * tip:
     * make a note of which version this is
 * exit Atom
-* configure the version of "tree-view" to download and patch:
-  * edit the file: `./.scripts/0_config.sh`
-  * tip:
-    * use the same version that came bundled with Atom,<br>
-      which was just disabled
-    * when I tried the most recent release,<br>
-      Atom refused to install the package,<br>
-      and listed problems with links to github issues
-    * patching the same package seems like an easy way to avoid version mismatch
+* edit the file: `./.scripts/0_config.sh`
+  * configure the name for the new package
+    * default: "tree-view-nodnd"
+  * configure the version of "tree-view" to download and patch
+    * tip:
+      * use the same version that came bundled with Atom,<br>
+        which was just disabled
+      * when I tried the most recent release,<br>
+        Atom refused to install the package,<br>
+        and listed problems with links to github issues
+      * patching the same package seems like an easy way to avoid version mismatch
 * run:
 
 ```bash
@@ -43,15 +46,8 @@ cd ./.scripts
 * start Atom:
   * Edit > Preferences > Packages
   * under "Community Packages",<br>
-    you'll see the newly installed package named: "tree-view"
+    you'll see the newly installed package<br>
+    (displayed using the name as it was configured)
   * it should already be enabled
   * in its "Settings",<br>
     "Enable Drag and Drop" is disabled by default
-  * issue:
-    * "Deprecation Cop" shows the warning:<br>
-      `You have the core package "tree-view" installed as a community package.`
-    * I'm tempted to change the name of the package to: "tree-view-nodnd",<br>
-      but there are a lot of touch-points that use the "tree-view" namespace:
-      * `atom.config` values
-      * `command` names
-    * it seems to work perfectly as-is

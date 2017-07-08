@@ -11,10 +11,9 @@ cd ..
 
 # --------------------------------------------------------------------
 
-original="tree-view-$ver"
-final="tree-view"
+new_dirname="${new_pkg_name}-${ver}"
 
-if [ ! -e "$original-nodnd.7z" ]; then
+if [ ! -e "${new_dirname}.7z" ]; then
   echo 'please apply patch before attempting to install'
   exit 1
 fi
@@ -27,12 +26,12 @@ if [ ! -d "$pkg_dir" ]; then
   mkdir -p "$pkg_dir"
 fi
 
-cp "$original-nodnd.7z" "$pkg_dir/"
+cp "${new_dirname}.7z" "$pkg_dir/"
 cd "$pkg_dir"
-7z x "$original-nodnd.7z"
-rm "$original-nodnd.7z"
-mv "$original-nodnd" "$final"
-cd "$final"
+7z x "${new_dirname}.7z"
+rm "${new_dirname}.7z"
+mv "${new_dirname}" "${new_pkg_name}"
+cd "${new_pkg_name}"
 
 # --------------------------------------------------------------------
 
