@@ -61,7 +61,6 @@ rm lib/tree-view.coffee.bak
 # note: this will reformat the whitespace (pretty-print) in "package.json".
 #       "util.format('%j', json)" is the closest we can get, without installing modules, but the string it produces cannot be parsed as JSON outside of javascript (Object attribute names aren't in quotes).
 #       "JSON.stringify" produces a string with no whitespace, but it is valid JSON.
-# note  due to whitespace issues and also that Objects in javascript are unordered, "diff" generates too much noise and not enough signal.
 # note: backup file uses extension ".bak.json" so it is still recognized by Node as a json data file.
 mv package.json package.bak.json
 node -e 'try {
@@ -76,7 +75,11 @@ node -e 'try {
   process.exit(1)
 }' "${new_pkg_name}" > package.json
 if [ $? -eq 0 ]; then
-  # diff -w package.json package.bak.json
+  # hacky, but allow npm to reformat "package.json"
+  npm version "0.0.1"
+  npm version "${ver}"
+
+  diff package.json package.bak.json
   rm package.bak.json
 else
   rm package.json
