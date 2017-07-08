@@ -52,7 +52,12 @@ rm lib/file-view.coffee.bak
 # --------------------------------------------------------------------
 
 mv lib/tree-view.coffee lib/tree-view.coffee.bak
-cat lib/tree-view.coffee.bak | tr '\n' '\f' | sed -r -e "s/(\f\s+@disposables\.add atom\.config\.onDidChange )('${old_pkg_name}\.sortFoldersBeforeFiles')(, =>\f\s+@updateRoots\(\))/\1\2\3\1'${old_pkg_name}.enableDragAndDrop'\3/g" | tr '\f' '\n' > lib/tree-view.coffee
+cat lib/tree-view.coffee.bak \
+  | tr '\n' '\f'             \
+  | sed -r -e "s/(\f\s+@disposables\.add atom\.config\.onDidChange )('${old_pkg_name}\.sortFoldersBeforeFiles')(, =>\f\s+@updateRoots\(\))/\1\2\3\1'${old_pkg_name}.enableDragAndDrop'\3\1'${old_pkg_name}.confirmDragAndDrop'\3/g" \
+  | sed -r -e "s/(\f)(\s+)(return false unless newDirectoryPath)/\1\2\3\1\1\2if atom.config.get('${old_pkg_name}.confirmDragAndDrop')\1\2  return unless confirm 'Are you sure?'/g" \
+  | tr '\f' '\n'             \
+  > lib/tree-view.coffee
 diff lib/tree-view.coffee lib/tree-view.coffee.bak
 rm lib/tree-view.coffee.bak
 
@@ -65,8 +70,8 @@ rm lib/tree-view.coffee.bak
 mv package.json package.bak.json
 node -e 'try {
   let pkg = require("./package.bak.json");
-  if (pkg.configSchema.enableDragAndDrop !== undefined) throw false
   pkg.configSchema.enableDragAndDrop = {type: "boolean", default: false, description: "Enable dragging and dropping of files and directories within the tree view."};
+  pkg.configSchema.confirmDragAndDrop = {type: "boolean", default: true, description: "Prompt to confirm the moving of files and directories within the tree view as the result of dragging and dropping."};
   pkg.name = process.argv[1]
   delete pkg.repository
   console.log(JSON.stringify(pkg));
