@@ -20,7 +20,6 @@ Instead, I took his idea and wrote a shell script to apply his changes as a patc
   * Edit > Preferences > Packages
   * under "Core Packages",<br>
     scroll nearly to the bottom and find the package named: "tree-view"
-  * click: "Disable"
   * tip:
     * make a note of which version this is
 * exit Atom
@@ -44,7 +43,15 @@ cd ./.scripts
 * start Atom:
   * Edit > Preferences > Packages
   * under "Community Packages",<br>
-    you'll see the newly installed package named: "tree-view-nodnd"
+    you'll see the newly installed package named: "tree-view"
   * it should already be enabled
   * in its "Settings",<br>
     "Enable Drag and Drop" is disabled by default
+  * issue:
+    * "Deprecation Cop" shows the warning:<br>
+      `You have the core package "tree-view" installed as a community package.`
+    * I'm tempted to change the name of the package to: "tree-view-nodnd",<br>
+      but there are a lot of touch-points that use the "tree-view" namespace:
+      * `atom.config` values
+      * `command` names
+    * it seems to work perfectly as-is

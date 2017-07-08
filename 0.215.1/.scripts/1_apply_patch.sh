@@ -62,7 +62,6 @@ node -e 'try {
   let pkg = require("./package.bak.json");
   if (pkg.configSchema.enableDragAndDrop !== undefined) throw false
   pkg.configSchema.enableDragAndDrop = {type: "boolean", default: false, description: "Enable dragging and dropping of files and directories within the tree view."};
-  pkg.name += "-nodnd"
   delete pkg.repository
   console.log(JSON.stringify(pkg));
   process.exit(0)

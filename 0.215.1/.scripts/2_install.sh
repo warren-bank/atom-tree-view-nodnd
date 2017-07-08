@@ -12,7 +12,7 @@ cd ..
 # --------------------------------------------------------------------
 
 original="tree-view-$ver"
-final="tree-view-nodnd"
+final="tree-view"
 
 if [ ! -e "$original-nodnd.7z" ]; then
   echo 'please apply patch before attempting to install'
