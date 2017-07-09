@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-ver=0.215.1
+ver=`apm list -pb | grep 'tree-view@' | sed 's/tree-view@//g'`
 
 new_pkg_name=tree-view-nodnd
