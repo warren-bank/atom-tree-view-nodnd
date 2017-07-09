@@ -1,13 +1,23 @@
 ### [tree-view-nodnd](https://github.com/warren-bank/atom-tree-view-nodnd)
 
-#### _tldr;_ Quick Install
+#### _tldr; :_ Quick Install
 
 ```bash
 # disable core package: "tree-view"
 apm disable "tree-view"
 
+# print the version of "tree-view"
+apm list -pb | grep 'tree-view@' | sed 's/tree-view@//g'
+
+# choose the directory corresponding to a version number <= version of "tree-view"
+# this assures the most appropriate set of scripts
+cd '0.215.1'
+
+# for the security minded: wipe all package data and start over
+rm *.zip *.7z
+
 # install community package: "tree-view-nodnd"
-cd ./.scripts
+cd '.scripts'
 ./1_apply_patch.sh
 ./2_install.sh
 ```
@@ -99,14 +109,26 @@ apm enable "tree-view"
 
 #### Final Comments
 
-* though the scripts should work on all recent versions of "tree-view" without requiring any changes,
+* though the scripts should work on all recent versions of "tree-view" without requiring any changes
   * this repo includes them under specific version(s)
-  * if a new version of "tree-view" was to make a change that requires a slight modification to `1_apply_patch.sh`,
-    * I'll add that new version to the rep
-    * under that new version, the directory will contain the updated scripts
-  * presumably, you have a target version of "tree-view" in mind
-    * look for the version directory in this repo that is `lte` (less than or equal to) your target
-    * copy, configure, and run the scripts contained there-in
-* each version directory in the repo contains additional files that can safely be ignored/deleted:
+  * if a new version of "tree-view" was to make a change that requires a slight modification to `1_apply_patch.sh`
+    * a new directory named for that version will be added to this repo
+    * updated scripts will be included within that directory
+  * to avoid any version mis-match between the "tree-view-nodnd" package and Atom,<br>
+    it's advisable that the target version to patch is the same as the version of "tree-view" bundled with Atom
+    * to determine this version number, run:<br>
+      `apm list -pb | grep 'tree-view@' | sed 's/tree-view@//g'`<br>
+    * to find the correct scripts:
+      * look for directory in this repo corresponding to a version number that is less-than or equal-to the target
+      * copy, _(optionally)_ configure, and run the scripts contained there-in
+  * note:
+    * the initial directory corresponds to version number: '0.215.1'
+    * this version number has no real significance,<br>
+      other than the fact that this is the version of "tree-view"<br>
+      that is bundled as a core package in Atom: `1.16.0 x64 Ubuntu`,<br>
+      which happens to be the release used for testing
+    * the scripts in this directory are likely to work with older versions of "tree-view",<br>
+      but I'm not aware of where this compatibility breaks
+* each directory in this repo corresponding to a version number contains data files that can safely be deleted:
   * the unmodified `.zip` archive (downloaded from github by `1_apply_patch.sh`)
   * the modified `.7z` archive (produced as output by `1_apply_patch.sh`)
