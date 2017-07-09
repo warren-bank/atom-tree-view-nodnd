@@ -1,5 +1,17 @@
 ### [tree-view-nodnd](https://github.com/warren-bank/atom-tree-view-nodnd)
 
+#### _tldr;_ Quick Install
+
+```bash
+# disable core package: "tree-view"
+apm disable "tree-view"
+
+# install community package: "tree-view-nodnd"
+cd ./.scripts
+./1_apply_patch.sh
+./2_install.sh
+```
+
 #### Background
 
 The Atom text editor includes the core package: [tree-view](https://github.com/atom/tree-view).
@@ -40,17 +52,17 @@ The code is easy to audit, so it can be used safely. The only "coding" a user ne
   * tip:
     * make a note of which version this is
 * exit Atom
-* edit the file: `./.scripts/0_config.sh`
+* _(optional)_ edit the file: `./.scripts/0_config.sh`
   * configure the name for the new package
     * default: "tree-view-nodnd"
   * configure the version of "tree-view" to download and patch
+    * default: same as core package that is bundled with Atom (and is now disabled)
     * tip:
-      * use the same version that came bundled with Atom,<br>
-        which was just disabled
-      * when I tried the most recent release,<br>
-        Atom refused to install the package,<br>
-        and listed problems with links to github issues
-      * patching the same package seems like an easy way to avoid version mismatch
+      * if you hard-code a version number:
+        * confirm that your value obeys the rules of [semantic versioning](http://semver.org/)
+        * confirm there exists a corresponding [release](https://github.com/atom/tree-view/releases)
+          * note: tags prepend "v" to the semantic version number
+          * example: version '0.215.1' is tagged 'v0.215.1'
 * run:
 
 ```bash
@@ -79,8 +91,6 @@ cd ./.scripts
       * click: "Enable"
 
 #### Uninstall Instructions (command-line)
-
-* run:
 
 ```bash
 apm remove "tree-view-nodnd"
