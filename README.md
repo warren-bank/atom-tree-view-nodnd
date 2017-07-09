@@ -69,6 +69,24 @@ cd ./.scripts
     * "Enable Drag and Drop" is disabled by default
     * "Confirm Drag and Drop" is enabled by default
 
+#### Uninstall Instructions (GUI)
+
+* start Atom:
+  * Edit > Preferences > Packages
+    * "Community Packages" > "tree-view-nodnd"
+      * click: "Uninstall"
+    * "Core Packages" > "tree-view"
+      * click: "Enable"
+
+#### Uninstall Instructions (command-line)
+
+* run:
+
+```bash
+apm remove "tree-view-nodnd"
+apm enable "tree-view"
+```
+
 #### Final Comments
 
 * though the scripts should work on all recent versions of "tree-view" without requiring any changes,
