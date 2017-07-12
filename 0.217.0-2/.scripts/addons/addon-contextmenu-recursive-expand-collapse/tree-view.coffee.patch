@@ -1,0 +1,16 @@
+
+    atom.contextMenu.add {
+      '.tree-view .full-menu [is="tree-view-directory"]': [{
+        created: (event) ->
+          element = event.target
+          if (! element.matches('[is="tree-view-directory"]'))
+            element = element.closest('[is="tree-view-directory"]')
+          if (element && element.matches('[is="tree-view-directory"]'))
+            if element.classList.contains('collapsed')
+              @label   = 'Expand Directory and All Children'
+              @command = 'tree-view-nodnd:recursive-expand-directory'
+            else
+              @label   = 'Collapse Directory and All Children'
+              @command = 'tree-view-nodnd:recursive-collapse-directory'
+      }]
+    }
