@@ -132,3 +132,18 @@ apm enable "tree-view"
 * each directory in this repo corresponding to a version number contains data files that can safely be deleted:
   * the unmodified `.zip` archive (downloaded from github by `1_apply_patch.sh`)
   * the modified `.7z` archive (produced as output by `1_apply_patch.sh`)
+
+#### Addons
+
+* there are other branches in this repo
+  * each branch is an orphan
+  * each branch contains an "addon" that is unrelated to "drag and drop"
+* each "addon" consists of additional bash scripts that apply patches to the "community package" variation of "tree-view" that is installed by the bash scripts in the "master" branch
+* each "addon" adds a new feature or enhancement
+* the list of available "addons" includes:
+  * [option to disable colors based on state in VCS](https://github.com/warren-bank/atom-tree-view-nodnd/tree/addon-vcs-color)
+  * [context menu item to recursively expand/collapse directory](https://github.com/warren-bank/atom-tree-view-nodnd/tree/addon-contextmenu-recursive-expand-collapse)
+  * [context menu item to open directory in terminal](https://github.com/warren-bank/atom-tree-view-nodnd/tree/addon-open-in-terminal)<br>
+    __note:__
+    * Has been tested in Linux (Lubuntu w/ `lxterminal`).
+    * Has not been tested in Windows or Mac; would appreciate feedback.
