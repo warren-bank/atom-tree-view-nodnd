@@ -40,7 +40,7 @@ cd "${pkg_dir}/${new_pkg_name}"
 mv lib/tree-view.coffee lib/tree-view.coffee.bak
 cat lib/tree-view.coffee.bak \
   | tr '\n' '\f'             \
-  | sed -r -e "s/(\f)(\s+)('${new_pkg_name}:show-in-file-manager': => @showSelectedEntryInFileManager\(\))/\1\2\3\1\2'${new_pkg_name}:show-in-terminal': => @showSelectedEntryInTerminal()/g" \
+  | sed -r -e "s/(\f)(\s+)('${new_pkg_name}:show-in-file-manager': => @showSelectedEntryInFileManager\(\))/\1\2\3\1\2'${new_pkg_name}:open-in-terminal': => @openSelectedEntryInTerminal()/g" \
   | sed -r -e "s/(\f\s+@disposables\.add atom\.config\.onDidChange )('${new_pkg_name}\.sortFoldersBeforeFiles')(, =>\f\s+@updateRoots\(\))/\1\2\3\1'${new_pkg_name}.terminalExecutable'\3/g" \
   | tr '\f' '\n'             \
   > lib/tree-view.coffee
