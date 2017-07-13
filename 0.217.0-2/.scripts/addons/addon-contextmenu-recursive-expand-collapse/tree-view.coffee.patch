@@ -1,6 +1,10 @@
 
     atom.contextMenu.add {
       '.tree-view .full-menu [is="tree-view-directory"]': [{
+        shouldDisplay: (event) =>
+          return false unless entry = @selectedEntry()
+          isDirectory = entry.classList.contains('directory')
+          return isDirectory
         created: (event) ->
           element = event.target
           if (! element.matches('[is="tree-view-directory"]'))
