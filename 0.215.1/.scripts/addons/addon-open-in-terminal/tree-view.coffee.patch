@@ -1,0 +1,28 @@
+
+  getCommandLineForTerminal: () ->
+    switch process.platform
+      when 'win32'
+        command: 'cmd.exe'
+        args: []
+      when 'darwin'
+        command: 'open'
+        args: ['-b', 'com.apple.terminal']
+      else
+        command: atom.config.get('tree-view.terminalExecutable')
+        args: []
+
+  openSelectedEntryInTerminal: ->
+    return unless entry = @selectedEntry()
+
+    pathToOpen = entry.getPath()
+    isFile = entry.classList.contains('file')
+    pathToOpen = path.dirname(pathToOpen) if isFile
+
+    # https://atom.io/docs/api/v1.7.0/BufferedProcess#instance-constructor
+    # https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
+    options = {
+      cwd: pathToOpen,
+      detached: true
+    }
+    {command, args} = @getCommandLineForTerminal()
+    showProcess = new BufferedProcess({command, args, options})
